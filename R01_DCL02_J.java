@@ -1,0 +1,20 @@
+// Noncompliant code
+// Rule 01. Declarations and Initialization (DCL) - DCL02-J
+
+List<Integer> list = Arrays.asList(new Integer[] {13, 14, 15});
+boolean first = true;
+
+System.out.println("Processing list...");
+for (Integer i: list) {
+  if (first) {
+    first = false;
+    i = new Integer(99);
+  }
+  System.out.println(" New item: " + i);
+  // Process i
+}
+
+System.out.println("Modified list?");
+for (Integer i: list) {
+  System.out.println("List item: " + i);
+}
