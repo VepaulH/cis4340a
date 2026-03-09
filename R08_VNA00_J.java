@@ -1,11 +1,11 @@
-// Noncompliant code
+// Compliant code
 // Rule 08. Visibility and Atomicity (VNA) - VNA00-J
 
 final class ControlledStop implements Runnable {
-  private boolean done = false;
+  private final AtomicBoolean done = new AtomicBoolean(false);
  
   @Override public void run() {
-    while (!done) {
+    while (!done.get()) {
       try {
         // ...
         Thread.currentThread().sleep(1000); // Do something
@@ -16,7 +16,7 @@ final class ControlledStop implements Runnable {
   }
 
   public void shutdown() {
-    done = true;
+    done.set(true);
   }
 }
 
